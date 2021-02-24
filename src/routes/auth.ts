@@ -77,7 +77,7 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-const me = (_: Request, res: Response) => {
+const authorized = (_: Request, res: Response) => {
   return res.json(res.locals.user);
 };
 
@@ -98,7 +98,7 @@ const router = Router();
 
 router.post('/register', register);
 router.post('/login', login);
-router.get('/me', auth, me);
+router.get('/authorized', auth, authorized);
 router.get('/logout', auth, logout);
 
 export default router;
