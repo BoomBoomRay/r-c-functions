@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import bcrypt from 'bcrypt';
 
-import { User } from '../entity/User';
+import User from '../entity/User';
 import auth from '../middleware/auth';
 
 const register = async (req: Request, res: Response) => {
