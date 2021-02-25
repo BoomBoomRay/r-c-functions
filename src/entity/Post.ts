@@ -1,15 +1,11 @@
-import { IsEmail, Length } from 'class-validator';
 import {
   Entity as TOEntity,
   Column,
-  Index,
   BeforeInsert,
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
 
-import bcrypt from 'bcrypt';
-import { Exclude } from 'class-transformer';
 import Entity from './Entity';
 import User from './User';
 import { makeId, slugify } from '../utils/helper';
@@ -23,27 +19,27 @@ export default class Post extends Entity {
   }
 
   @Column()
-  identifier: string; // 7 character id
+  identifier!: string; // 7 character id
 
   @Column()
-  title: string;
+  title!: string;
 
   @Column()
-  slug: string;
+  slug!: string;
 
   @Column({ nullable: true, type: 'text' })
-  body: string;
+  body!: string;
 
   @Column()
-  subName: string;
+  subName!: string;
 
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
-  user: User;
+  user!: User;
 
   @ManyToOne(() => Sub, (sub) => sub.posts)
   @JoinColumn({ name: 'subName', referencedColumnName: 'name' })
-  sub: Sub;
+  sub!: Sub;
 
   @BeforeInsert()
   makeIdAndSlug() {

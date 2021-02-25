@@ -15,6 +15,7 @@ const createPost = async (req: Request, res: Response) => {
   try {
     const subRecord = await Sub.findOneOrFail({ name: sub });
     const post = new Post({ title, body, user, sub: subRecord });
+    console.log(post);
     await post.save();
     return res.json(post);
   } catch (error) {

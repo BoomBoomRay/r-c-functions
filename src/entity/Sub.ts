@@ -1,4 +1,3 @@
-import { IsEmail, Length } from 'class-validator';
 import {
   Entity as TOEntity,
   Column,
@@ -8,11 +7,8 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import bcrypt from 'bcrypt';
-import { Exclude } from 'class-transformer';
 import Entity from './Entity';
 import User from './User';
-import { makeId, slugify } from '../utils/helper';
 import Post from './Post';
 
 @TOEntity('subs')
@@ -23,24 +19,24 @@ export default class Sub extends Entity {
   }
   @Index()
   @Column({ unique: true })
-  name: string;
+  name!: string;
 
   @Column()
-  title: string;
+  title!: string;
 
   @Column({ nullable: true })
-  description: string;
+  description!: string;
 
   @Column({ nullable: true })
-  imageUrn: string;
+  imageUrn!: string;
 
   @Column({ nullable: true })
-  bannerUrn: string;
+  bannerUrn!: string;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
-  user: User;
+  user!: User;
 
   @OneToMany(() => Post, (post) => post.sub)
-  posts: Post[];
+  posts!: Post[];
 }

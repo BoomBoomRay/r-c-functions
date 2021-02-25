@@ -52,12 +52,12 @@ const login = async (req: Request, res: Response) => {
 
     if (!user) res.status(404).json({ error: 'User not found' });
 
-    const passwordMatches = await bcrypt.compare(password, user.password);
+    const passwordMatches = await bcrypt.compare(password, user!.password);
 
     if (!passwordMatches) {
       return res.status(401).json({ password: 'Password is incorrect' });
     }
-    const token = jwt.sign(username, process.env.JWT_SECRET);
+    const token = jwt.sign(username, process.env.JWT_SECRET!);
 
     res.set(
       'Set-Cookie',

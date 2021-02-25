@@ -23,20 +23,20 @@ export default class User extends Entity {
   // Custom message errors
   @Length(3, 255, { message: 'Username must be at least 3 characters long' })
   @Column({ unique: true })
-  username: string;
+  username!: string;
 
   @Index()
   @IsEmail()
   @Column({ unique: true })
-  email: string;
+  email!: string;
 
   @Exclude()
   @Column()
   @Length(6, 255)
-  password: string;
+  password!: string;
 
   @OneToMany(() => Post, (post) => post.user)
-  posts: Post[];
+  posts!: Post[];
 
   @BeforeInsert()
   async hashPassword() {
