@@ -1,7 +1,29 @@
+import { FormEvent, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import axios from 'axios';
+import Inputgroup from '../components/InputGroup';
 
 export default function Home() {
+  const [state, setState] = useState({ username: '', password: '', email: '' });
+  const [agreement, setAgreement] = useState(false);
+  const [errors, setErrors] = useState<any>({});
+
+  const handleInput = (e) => {
+    const { value, name } = e.target;
+    setState({ ...state, [name]: value });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const result = await axios.post('/auth/register', state);
+      console.log('result', result);
+    } catch (error) {
+      setErrors(error.response.data);
+    }
+    setState({ username: '', password: '', email: '' });
+  };
   return (
     <div className='flex'>
       <Head>
@@ -19,10 +41,12 @@ export default function Home() {
             By continuing, you agree to our <a>User Agreement</a> and{' '}
             <a>Privacy Policy</a>
           </p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className='mb-6'>
               <input
                 type='checkbox'
+                onChange={() => setAgreement(!agreement)}
+                checked={agreement}
                 className='mr-1 cursor-pointer'
                 id='agreement'
               />
@@ -30,28 +54,37 @@ export default function Home() {
                 I agree to get emails about cool stuff
               </label>
             </div>
-            <div className='mb-2'>
-              <input
-                type='email'
-                className='w-full p-3 text-sm transition duration-300 border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
-                placeholder='Email'
-              />
-            </div>
-            <div className='mb-2'>
-              <input
-                type='text'
-                className='w-full p-3 text-sm transition duration-300 border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
-                placeholder='Username'
-              />
-            </div>
-            <div className='mb-2'>
-              <input
-                type='text'
-                className='w-full p-3 text-sm transition duration-300 border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
-                placeholder='Password'
-              />
-            </div>
-            <button className='w-full py-2 mb-4 text-xs font-bold text-white uppercase bg-blue-500 border border-blue-500 rounded'>
+            <Inputgroup
+              className='mb-2'
+              value={state.email}
+              setValue={handleInput}
+              placeholder='Email'
+              error={errors.email}
+              type='email'
+              name='email'
+            />
+            <Inputgroup
+              setValue={handleInput}
+              type='text'
+              name='username'
+              value={state.username}
+              className='mb-2'
+              placeholder='Username'
+              error={errors.username}
+            />
+            <Inputgroup
+              setValue={handleInput}
+              type='text'
+              name='password'
+              value={state.password}
+              className='mb-4'
+              placeholder='Password'
+              error={errors.password}
+            />
+            <button
+              onClick={handleSubmit}
+              className='w-full py-2 mb-4 text-xs font-bold text-white uppercase bg-blue-500 border border-blue-500 rounded'
+            >
               Sign up
             </button>
           </form>
