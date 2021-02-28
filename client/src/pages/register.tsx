@@ -33,21 +33,21 @@ export default function Home() {
             <div className='mb-2'>
               <input
                 type='email'
-                className='w-full p-3 text-sm border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
+                className='w-full p-3 text-sm transition duration-300 border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
                 placeholder='Email'
               />
             </div>
             <div className='mb-2'>
               <input
                 type='text'
-                className='w-full p-3 text-sm border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
+                className='w-full p-3 text-sm transition duration-300 border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
                 placeholder='Username'
               />
             </div>
             <div className='mb-2'>
               <input
                 type='text'
-                className='w-full p-3 text-sm border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
+                className='w-full p-3 text-sm transition duration-300 border border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white'
                 placeholder='Password'
               />
             </div>

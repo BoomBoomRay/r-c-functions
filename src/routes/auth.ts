@@ -26,8 +26,16 @@ const register = async (req: Request, res: Response) => {
     const user = new User({ email, username, password });
 
     errors = await validate(user);
+
+    const errorObject = errors.reduce((total: any, item: any) => {
+      const key = item.property;
+      const value = Object.values(item.constraints)[0];
+      total[key] = value;
+      return total;
+    }, {});
+
     if (errors.length > 0) {
-      return res.status(400).json({ errors });
+      return res.status(400).json(errorObject);
     }
 
     await user.save();
