@@ -18,7 +18,13 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(trim);
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.ORIGIN,
+    optionsSuccessStatus: 200,
+  })
+);
 app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
