@@ -4,7 +4,7 @@ import Document, {
   Main,
   NextScript,
   DocumentContext,
-} from 'next/document';
+} from "next/document";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -16,13 +16,19 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600&display=swap'
-            rel='stylesheet'
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+            crossOrigin="anonymous"
           />
         </Head>
-        <body style={{ backgroundColor: '#DAE0E6' }} className='font-body'>
+        <body style={{ backgroundColor: "#DAE0E6" }} className="font-body">
           <Main />
           <NextScript />
         </body>
